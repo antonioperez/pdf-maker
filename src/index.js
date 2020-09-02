@@ -5,19 +5,19 @@ const express = require("express");
 const app = express();
 
 app.get("/", async (req, res) => {
-	sendPDF(res, '<h1>Hello People!</h1>');
+	await sendPDF(res, '<h1>Hello People!</h1>');
 });
 
 app.post("/", async (req, res) => {
 	const body = req.body || {};
 	const html = body.html;
-	sendPDF(res, html);
+	await sendPDF(res, html);
 });
 
 app.listen(process.env.PORT || 3000);
 
 
-function sendPDF(res, html) {
+async function sendPDF(res, html) {
 	try {
 		const pdf = await pdfService.buildBlobFromHtml(html);
 		res.writeHead(200, {
