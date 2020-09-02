@@ -1,0 +1,15 @@
+version: 0.2
+phases:
+    install:
+        commands:
+            - 'npm install'
+artifacts:
+    type: zip
+    files:
+        - Procfile
+        - .ebextensions/*
+        - .npmrc
+        - package.json
+        - package-lock.json
+        - 'src/**/*'
+        - README.md
