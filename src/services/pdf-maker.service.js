@@ -14,6 +14,8 @@ async function buildBlobFromHtml(htmlString) {
 
 	const page = await browser.newPage();
 	await page.setViewport({
+		width: 1920,
+    height: 1080,
 		deviceScaleFactor: 2,
 	});
 
