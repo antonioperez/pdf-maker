@@ -13,6 +13,10 @@ async function buildBlobFromHtml(htmlString) {
 	});
 
 	const page = await browser.newPage();
+	await page.setViewport({
+		deviceScaleFactor: 2,
+	});
+
 	await page.setContent(htmlString);
 	const pdf = await page.pdf({ format: 'Letter' });
 
