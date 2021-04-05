@@ -4,7 +4,7 @@ const chicago = { lat: 36.7854513, lng: -119.9346459 };
 function addGeoJson(map) {
 	let infowindow = new google.maps.InfoWindow();
 	geojsonlayer = new google.maps.Data();
-	geojsonlayer.loadGeoJson('https://opendata.arcgis.com/datasets/8713ced9b78a4abb97dc130a691a8695_0.geojson');
+	geojsonlayer.loadGeoJson('http://pdfgenerator-env.eba-x7cpcrdv.us-west-1.elasticbeanstalk.com/ca_water_districts');
 
 	geojsonlayer.addListener('click', (event) => {
 		const feature = event.feature || {};

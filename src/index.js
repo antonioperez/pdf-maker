@@ -20,7 +20,6 @@ app.post("/", async (req, res) => {
 
 app.get("/ca_water_districts", async (req, res) => {
 	const data = await gisService.getCaliforniaWaterBoundaries().catch(() => {});
-	console.log(data);
 	res.send(data);
 });
 
