@@ -25,7 +25,6 @@ app.get("/ca_water_districts", async (req, res) => {
 
 app.listen(process.env.PORT || 3000);
 
-
 async function sendPDF(res, html) {
 	try {
 		const pdf = await pdfService.buildBlobFromHtml(html);
@@ -38,7 +37,7 @@ async function sendPDF(res, html) {
 		res.end(pdf);
 
 	} catch (error) {
-		res.status(400)
+		res.status(400);
 		res.send(error.message);
 
 		console.log(error);
