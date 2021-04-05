@@ -1,5 +1,6 @@
 "use strict";
 
+const gisService = require('./services/gis.service');
 const pdfService = require('./services/pdf-maker.service');
 const express = require("express");
 const app = express();
@@ -15,6 +16,12 @@ app.post("/", async (req, res) => {
 	const body = req.body || {};
 	const html = body.html;
 	await sendPDF(res, html);
+});
+
+app.get("/ca_water_districts", async (req, res) => {
+	const data = await gisService.getCaliforniaWaterBoundaries().catch(() => {});
+	console.log(data);
+	res.send(data);
 });
 
 app.listen(process.env.PORT || 3000);
