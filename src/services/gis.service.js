@@ -26,7 +26,7 @@ async function getCaliforniaWaterBoundaries() {
 }
 
 function getCaliforniaWaterBoundariesData(){
-	const url = 'https://gis.water.ca.gov/arcgis/rest/services/Boundaries/i03_WaterDistricts/FeatureServer/0/query?where=1%3D1&outFields=AGENCYNAME&outSR=4326&f=geojson';
+	const url = 'https://gis.water.ca.gov/arcgis/rest/services/Boundaries/i03_WaterDistricts/FeatureServer/0/query?where=1%3D1&outFields=AGENCYNAME,AGENCYUNIQUEID&outSR=4326&f=geojson';
 
 	return axios.get(url)
 		.then(response => response.data)
