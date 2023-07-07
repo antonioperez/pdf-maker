@@ -7,7 +7,7 @@ artifacts:
     type: zip
     files:
         - Procfile
-        - .ebextensions/*
+        - .platform/**/*
         - .npmrc
         - package.json
         - package-lock.json
