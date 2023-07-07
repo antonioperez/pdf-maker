@@ -1,16 +1,18 @@
 "use strict";
-const puppeteer = require("puppeteer");
+const chromium = require('chrome-aws-lambda');
 
 module.exports = {
 	buildBlobFromHtml,
 };
 
 async function buildBlobFromHtml(htmlString) {
-	const browser = await puppeteer.launch({
-		executablePath: "/usr/bin/google-chrome-stable",
+	const browser = await chromium.puppeteer.launch({
+		args: ["--no-sandbox", "--disable-setuid-sandbox"].concat(chromium.args),
+		defaultViewport: chromium.defaultViewport,
+		executablePath: await chromium.executablePath,
 		headless: true,
-		args: ["--no-sandbox", "--disable-setuid-sandbox"],
-	});
+		ignoreHTTPSErrors: true,
+	  });
 
 	const page = await browser.newPage();
 	await page.setContent(htmlString);
