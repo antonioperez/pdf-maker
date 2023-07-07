@@ -7,6 +7,7 @@ module.exports = {
 
 async function buildBlobFromHtml(htmlString) {
 	const browser = await puppeteer.launch({
+		executablePath: "/usr/bin/google-chrome-stable",
 		headless: true,
 		ignoreHTTPSErrors: true,
 		args: ["--hide-scrollbars", "--disable-web-security", "--no-sandbox", "--disable-setuid-sandbox"],
