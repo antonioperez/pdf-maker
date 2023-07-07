@@ -1,17 +1,26 @@
 "use strict";
 const puppeteer = require("puppeteer-core");
+const chromium = require("@sparticuz/chromium");
 
 module.exports = {
 	buildBlobFromHtml,
 };
 
 async function buildBlobFromHtml(htmlString) {
+	// const browser = await puppeteer.launch({
+	// 	executablePath: "/usr/bin/google-chrome-stable",
+	// 	headless: true,
+	// 	ignoreHTTPSErrors: true,
+	// 	args: ["--hide-scrollbars", "--disable-web-security", "--no-sandbox", "--disable-setuid-sandbox"],
+	// });
+
 	const browser = await puppeteer.launch({
-		executablePath: "/usr/bin/google-chrome-stable",
-		headless: true,
+		executablePath: await chromium.executablePath(),
+		headless: chromium.headless,
 		ignoreHTTPSErrors: true,
-		args: ["--hide-scrollbars", "--disable-web-security", "--no-sandbox", "--disable-setuid-sandbox"],
-	});
+		defaultViewport: chromium.defaultViewport,
+		args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
+	  });
 
 	const page = await browser.newPage();
 	await page.setContent(htmlString);
