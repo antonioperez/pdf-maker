@@ -24,6 +24,8 @@ async function buildBlobFromHtml(htmlString) {
 
 	const page = await browser.newPage();
 	await page.setContent(htmlString);
+	await page.goto('data:text/html,' + document, { waitUntil: 'networkidle' });
+
 	const pdf = await page.pdf({ format: 'Letter' });
 
 	await browser.close();
