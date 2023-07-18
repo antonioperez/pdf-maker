@@ -23,8 +23,8 @@ async function buildBlobFromHtml(htmlString) {
 	  });
 
 	const page = await browser.newPage();
-	await page.setContent(htmlString);
-	await page.goto('data:text/html,' + htmlString, { waitUntil: 'networkidle' });
+	await page.setContent(htmlString, { waitUntil: 'networkidle0' });
+	//await page.goto('data:text/html,' + htmlString, { waitUntil: 'networkidle0' });
 
 	const pdf = await page.pdf({ format: 'Letter' });
 
