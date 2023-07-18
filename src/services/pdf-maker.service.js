@@ -16,7 +16,7 @@ async function buildBlobFromHtml(htmlString) {
 
 	const browser = await puppeteer.launch({
 		executablePath: await chromium.executablePath(),
-		headless: chromium.headless,
+		headless: true,
 		ignoreHTTPSErrors: true,
 		defaultViewport: chromium.defaultViewport,
 		args: ["--hide-scrollbars", "--disable-web-security", "--no-sandbox", "--disable-setuid-sandbox", '--font-render-hinting=none'],
