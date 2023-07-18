@@ -19,12 +19,12 @@ async function buildBlobFromHtml(htmlString) {
 		headless: chromium.headless,
 		ignoreHTTPSErrors: true,
 		defaultViewport: chromium.defaultViewport,
-		args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
+		args: [...chromium.args, "--hide-scrollbars", "--disable-web-security", "--no-sandbox", "--disable-setuid-sandbox"],
 	  });
 
 	const page = await browser.newPage();
-	//await page.setContent(htmlString, { waitUntil: 'networkidle0' });
-	await page.goto('data:text/html,' + htmlString, { waitUntil: 'networkidle0' });
+	await page.setContent(htmlString, { waitUntil: 'networkidle0' });
+	//await page.goto('data:text/html,' + htmlString, { waitUntil: 'networkidle0' });
 
 	const pdf = await page.pdf({ format: 'Letter' });
 
