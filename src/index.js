@@ -25,6 +25,10 @@ app.get("/", async (req, res) => {
 	await sendPDF(res, '<h1>Hello People!</h1>');
 });
 
+app.get("/hello", async (req, res) => {
+	res.send('OK');
+});
+
 app.post("/", async (req, res) => {
 	const body = req.body || {};
 	const html = body.html;
