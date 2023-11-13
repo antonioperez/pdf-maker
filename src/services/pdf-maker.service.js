@@ -19,7 +19,7 @@ async function buildBlobFromHtml(htmlString) {
 		headless: true,
 		ignoreHTTPSErrors: true,
 		defaultViewport: chromium.defaultViewport,
-		args: ["--hide-scrollbars", "--disable-web-security", "--no-sandbox", "--disable-setuid-sandbox", '--font-render-hinting=none'],
+		args: ["--hide-scrollbars", "--disable-web-security", "--no-sandbox", "--disable-setuid-sandbox", '--font-render-hinting=none', '--shm-size=3gb'],
 	  });
 
 	const page = await browser.newPage();
