@@ -22,6 +22,7 @@ async function buildBlobFromHtml(htmlString) {
 		args: [
 			"--hide-scrollbars",
 			"--disable-web-security",
+			"--disable-dev-shm-usage",
 			"--no-sandbox",
 			"--disable-setuid-sandbox",
 			"--font-render-hinting=none",
