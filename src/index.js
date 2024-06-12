@@ -21,11 +21,11 @@ app.use(cors({
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded());
 
-app.get("/", async (req, res) => {
+app.get("/hello", async (req, res) => {
 	await sendPDF(res, '<h1>Hello People!</h1>');
 });
 
-app.get("/hello", async (req, res) => {
+app.get("/", async (req, res) => {
 	res.send('OK');
 });
 
