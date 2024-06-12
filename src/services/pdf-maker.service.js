@@ -15,7 +15,7 @@ async function buildBlobFromHtml(htmlString) {
 	// });
 
 	const browser = await puppeteer.launch({
-		executablePath: await chromium.executablePath(),
+		executablePath: '/usr/bin/chromium-browser',
 		headless: true,
 		ignoreHTTPSErrors: true,
 		defaultViewport: chromium.defaultViewport,
