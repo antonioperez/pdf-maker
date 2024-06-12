@@ -26,7 +26,7 @@ async function buildBlobFromHtml(htmlString) {
 	// await page.setUserAgent(
 	// 	"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36"
 	// );
-	await page.setContent(htmlString, { waitUntil: "networkidle0" });
+	await page.setContent(htmlString, { waitUntil: "load" });
 	//await page.goto('data:text/html,' + htmlString, { waitUntil: 'networkidle0' });
 
 	const pdf = await page.pdf({ format: "Letter" });
