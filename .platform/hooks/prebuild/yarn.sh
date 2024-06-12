@@ -1,7 +1,7 @@
 #!/bin/bash
 
-sudo apt install chromium-browser chromium-codecs-ffmpeg
 sudo amazon-linux-extras install epel -y
+sudo yum install -y chromium
 
 # Copyright 2017-present: Intoli, LLC
 # Source: https://intoli.com/blog/installing-google-chrome-on-centos/
