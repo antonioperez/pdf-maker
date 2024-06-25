@@ -56,7 +56,7 @@ async function sendPDF(res, title, html) {
 		res.end(pdf);
 
 	} catch (error) {
-		console.log(error);
+		console.log('sendPDF: ', error.message || error);
 
 		res.status(500);
 		res.send(error.message);
