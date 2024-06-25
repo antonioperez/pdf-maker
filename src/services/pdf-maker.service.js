@@ -7,6 +7,38 @@ module.exports = {
 };
 
 const pdfCache = new cacheService();
+let browser;
+
+const puppeteerLaunch = async () => {
+	const args = [
+		"--no-sandbox",
+		"--disable-setuid-sandbox",
+		"--disable-dev-shm-usage",
+		"--disable-session-crashed-bubble",
+		"--disable-accelerated-2d-canvas",
+		"--no-first-run",
+		"--no-zygote",
+		"--single-process",
+		"--noerrdialogs",
+		"--disable-gpu",
+		"--hide-scrollbars",
+		"--disable-web-security",
+		"--font-render-hinting=none",
+	];
+
+	browser = await puppeteer.launch({
+		executablePath: "/usr/bin/chromium-browser",
+		headless: true,
+		ignoreHTTPSErrors: true,
+		args,
+	});
+
+	browser.on("disconnected", () => {
+		if (browser.process() != null) browser.process().kill("SIGINT");
+
+		puppeteerLaunch();
+	});
+};
 
 async function buildBlobFromHtml(title, htmlString) {
 	// const browser = await puppeteer.launch({
@@ -22,28 +54,7 @@ async function buildBlobFromHtml(title, htmlString) {
 		return Promise.resolve(cachedPdf);
 	}
 
-	const args = [
-		'--no-sandbox',
-		'--disable-setuid-sandbox',
-		'--disable-dev-shm-usage',
-		'--disable-session-crashed-bubble',
-		'--disable-accelerated-2d-canvas',
-		'--no-first-run',
-		'--no-zygote',
-		'--single-process',
-		'--noerrdialogs',
-		'--disable-gpu',
-		'--hide-scrollbars',
-		'--disable-web-security',
-		'--font-render-hinting=none',
-	]
-
-	const browser = await puppeteer.launch({
-		executablePath: '/usr/bin/chromium-browser',
-		headless: true,
-		ignoreHTTPSErrors: true,
-		args,
-	});
+	await puppeteerLaunch();
 
 	const page = await browser.newPage();
 
