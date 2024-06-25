@@ -4,6 +4,7 @@ const cacheService = require("./cache.service");
 
 module.exports = {
 	buildBlobFromHtml,
+	clearCache,
 };
 
 const pdfCache = new cacheService();
@@ -78,4 +79,8 @@ async function buildBlobFromHtml(title, htmlString) {
 	pdfCache.set(title, pdf, minutesUntilExpiration);
 
 	return pdf;
+}
+
+function clearCache(title) {
+	pdfCache.remove(title);
 }

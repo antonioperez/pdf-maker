@@ -37,6 +37,16 @@ app.post("/", async (req, res) => {
 	await sendPDF(res, title, html);
 });
 
+app.post("/clear_cache", async (req, res) => {
+	const body = req.body || {};
+	const title = body.title;
+
+	pdfService.clearCache(title);
+
+	res.status(200);
+	res.send('Cache Cleared');
+});
+
 app.get("/ca_water_districts", async (req, res) => {
 	const data = await gisService.getCaliforniaWaterBoundaries().catch(() => {});
 	res.send(data);
