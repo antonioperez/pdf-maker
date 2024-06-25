@@ -34,7 +34,13 @@ const puppeteerLaunch = async () => {
 	});
 
 	browser.on("disconnected", () => {
-		if (browser.process() != null) browser.process().kill("SIGINT");
+		if (browser.process() != null) {
+			console.log("Killing browser process");
+
+			browser.process().kill("SIGINT");
+		}
+
+		console.log("Browser disconnected");
 
 		puppeteerLaunch();
 	});
