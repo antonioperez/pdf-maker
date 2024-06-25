@@ -1,6 +1,6 @@
 "use strict";
 const puppeteer = require("puppeteer-core");
-const chromium = require("@sparticuz/chromium");
+// const chromium = require("@sparticuz/chromium");
 
 module.exports = {
 	buildBlobFromHtml,
@@ -18,7 +18,7 @@ async function buildBlobFromHtml(htmlString) {
 		executablePath: '/usr/bin/chromium-browser',
 		headless: true,
 		ignoreHTTPSErrors: true,
-		defaultViewport: chromium.defaultViewport,
+		// defaultViewport: chromium.defaultViewport,
 		args: ["--hide-scrollbars", "--disable-web-security", "--no-sandbox", "--disable-setuid-sandbox", '--font-render-hinting=none'],
 	});
 

@@ -54,9 +54,9 @@ async function sendPDF(res, html) {
 		res.end(pdf);
 
 	} catch (error) {
+		console.log(error);
+
 		res.status(400);
 		res.send(error.message);
-
-		console.log(error);
 	}
 }
