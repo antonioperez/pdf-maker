@@ -56,6 +56,8 @@ async function buildBlobFromHtml(title, htmlString) {
 
 	const cachedPdf = pdfCache.get(title);
 
+	console.log("cachedPdf", title, !!cachedPdf);
+
 	if (cachedPdf) {
 		return Promise.resolve(cachedPdf);
 	}
