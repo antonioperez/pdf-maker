@@ -1,12 +1,14 @@
 "use strict";
 const puppeteer = require("puppeteer-core");
-// const chromium = require("@sparticuz/chromium");
+const cacheService = require("./cache.service");
 
 module.exports = {
 	buildBlobFromHtml,
 };
 
-async function buildBlobFromHtml(htmlString) {
+const pdfCache = new cacheService();
+
+async function buildBlobFromHtml(title, htmlString) {
 	// const browser = await puppeteer.launch({
 	// 	executablePath: "/usr/bin/google-chrome-stable",
 	// 	headless: true,
@@ -14,24 +16,47 @@ async function buildBlobFromHtml(htmlString) {
 	// 	args: ["--hide-scrollbars", "--disable-web-security", "--no-sandbox", "--disable-setuid-sandbox"],
 	// });
 
+	const cachedPdf = pdfCache.get(title);
+
+	if (cachedPdf) {
+		return Promise.resolve(cachedPdf);
+	}
+
+	const args = [
+		'--no-sandbox',
+		'--disable-setuid-sandbox',
+		'--disable-dev-shm-usage',
+		'--disable-session-crashed-bubble',
+		'--disable-accelerated-2d-canvas',
+		'--no-first-run',
+		'--no-zygote',
+		'--single-process',
+		'--noerrdialogs',
+		'--disable-gpu',
+		'--hide-scrollbars',
+		'--disable-web-security',
+		'--font-render-hinting=none',
+	]
+
 	const browser = await puppeteer.launch({
 		executablePath: '/usr/bin/chromium-browser',
 		headless: true,
 		ignoreHTTPSErrors: true,
-		// defaultViewport: chromium.defaultViewport,
-		args: ["--hide-scrollbars", "--disable-web-security", "--no-sandbox", "--disable-setuid-sandbox", '--font-render-hinting=none'],
+		args,
 	});
 
 	const page = await browser.newPage();
-	// await page.setUserAgent(
-	// 	"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36"
-	// );
-	//page.setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36 WAIT_UNTIL=load");
+
 	await page.setContent(htmlString, { waitUntil: "networkidle0" });
 	//await page.goto('data:text/html,' + htmlString, { waitUntil: 'networkidle0' });
 
 	const pdf = await page.pdf({ format: "Letter" });
 
 	await browser.close();
+
+	const minutesUntilExpiration = 1440;
+
+	pdfCache.set(title, pdf, minutesUntilExpiration);
+
 	return pdf;
 }

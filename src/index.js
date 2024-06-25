@@ -32,7 +32,9 @@ app.get("/", async (req, res) => {
 app.post("/", async (req, res) => {
 	const body = req.body || {};
 	const html = body.html;
-	await sendPDF(res, html);
+	const title = body.title;
+
+	await sendPDF(res, title, html);
 });
 
 app.get("/ca_water_districts", async (req, res) => {
@@ -42,9 +44,9 @@ app.get("/ca_water_districts", async (req, res) => {
 
 app.listen(process.env.PORT || 3000);
 
-async function sendPDF(res, html) {
+async function sendPDF(res, title, html) {
 	try {
-		const pdf = await pdfService.buildBlobFromHtml(html);
+		const pdf = await pdfService.buildBlobFromHtml(title, html);
 		res.writeHead(200, {
 			"Content-Type": "application/pdf",
 			"Content-Disposition": "attachment; filename=download.pdf",
@@ -56,7 +58,7 @@ async function sendPDF(res, html) {
 	} catch (error) {
 		console.log(error);
 
-		res.status(400);
+		res.status(500);
 		res.send(error.message);
 	}
 }
