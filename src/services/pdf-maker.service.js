@@ -71,7 +71,7 @@ async function buildBlobFromHtml(title, htmlString) {
 
 	const pdf = await page.pdf({ format: "Letter" });
 
-	await browser.close();
+	await page.close();
 
 	const minutesUntilExpiration = 1440;
 
