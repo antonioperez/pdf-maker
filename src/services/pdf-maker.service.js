@@ -55,7 +55,7 @@ async function buildBlobFromHtml(title, htmlString) {
 	// 	args: ["--hide-scrollbars", "--disable-web-security", "--no-sandbox", "--disable-setuid-sandbox"],
 	// });
 
-	const cachedPdf = pdfCache.get(title);
+	const cachedPdf = pdfCache.get(title || '');
 
 	console.log("cachedPdf", title, !!cachedPdf);
 
@@ -65,20 +65,30 @@ async function buildBlobFromHtml(title, htmlString) {
 
 	await puppeteerLaunch();
 
-	const page = await browser.newPage();
+	if (!browser) {
+		await puppeteerLaunch();
+	}
 
-	await page.setContent(htmlString, { waitUntil: "networkidle0" });
-	//await page.goto('data:text/html,' + htmlString, { waitUntil: 'networkidle0' });
+	if (htmlString) {
+		const page = await browser.newPage();
 
-	const pdf = await page.pdf({ format: "Letter" });
+		await page.setContent(htmlString, { waitUntil: "networkidle0" });
+		//await page.goto('data:text/html,' + htmlString, { waitUntil: 'networkidle0' });
 
-	await page.close();
+		const pdf = await page.pdf({ format: "Letter" });
 
-	const minutesUntilExpiration = 1440;
+		await page.close();
 
-	pdfCache.set(title, pdf, minutesUntilExpiration);
+		const minutesUntilExpiration = 1440;
 
-	return pdf;
+		if (title) {
+			pdfCache.set(title, pdf, minutesUntilExpiration);
+		}
+
+		return pdf;
+	}
+
+	return Promise.reject(new Error("No HTML Provided"));
 }
 
 function clearCache(title) {
