@@ -4,15 +4,16 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js"
+    "dev": "node src/index.js",
+    "start": "./node_modules/pm2/bin/pm2-runtime start src/index.js -i max --watch --node-args=\"--max-old-space-size=1000\""
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@sparticuz/chromium": "^109.0.5",
     "axios": "^0.21.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "pm2": "^5.4.1",
     "puppeteer-core": "^22.11.1"
   }
 }
