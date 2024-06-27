@@ -57,19 +57,19 @@ async function buildBlobFromHtml(title, htmlString) {
 
 	const cachedPdf = pdfCache.get(title || '');
 
-	console.log("cachedPdf", title, !!cachedPdf);
+	console.log("cachedPdf", title || '', !!cachedPdf);
 
 	if (cachedPdf) {
 		return Promise.resolve(cachedPdf);
 	}
 
-	await puppeteerLaunch();
-
-	if (!browser) {
-		await puppeteerLaunch();
-	}
-
 	if (htmlString) {
+		await puppeteerLaunch();
+
+		if (!browser) {
+			await puppeteerLaunch();
+		}
+
 		const page = await browser.newPage();
 
 		await page.setContent(htmlString, { waitUntil: "networkidle0" });
@@ -88,7 +88,7 @@ async function buildBlobFromHtml(title, htmlString) {
 		return pdf;
 	}
 
-	return Promise.reject(new Error("No HTML Provided"));
+	return;
 }
 
 function clearCache(title) {

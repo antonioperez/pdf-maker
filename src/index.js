@@ -56,7 +56,15 @@ app.listen(process.env.PORT || 3000);
 
 async function sendPDF(res, title, html) {
 	try {
+		if (!html) {
+			res.status(400);
+			res.send('HTML is required');
+
+			return;
+		}
+
 		const pdf = await pdfService.buildBlobFromHtml(title, html);
+
 		res.writeHead(200, {
 			"Content-Type": "application/pdf",
 			"Content-Disposition": "attachment; filename=download.pdf",
