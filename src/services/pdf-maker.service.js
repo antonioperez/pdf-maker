@@ -28,11 +28,11 @@ const puppeteerLaunch = async () => {
 
 	browser = await puppeteer.launch({
 		executablePath: await chromium.executablePath(),
-		//args: chromium.args,
-		headless: 'shell',
+		args: chromium.args,
+		headless: true,
 		ignoreHTTPSErrors: true,
 		defaultViewport: chromium.defaultViewport,
-		args: ["--hide-scrollbars", "--disable-web-security", "--no-sandbox", "--disable-setuid-sandbox", '--font-render-hinting=none'],
+		//args
 	});
 
 	browser.on("disconnected", () => {
