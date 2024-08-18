@@ -28,7 +28,7 @@ const puppeteerLaunch = async () => {
 
 	browser = await puppeteer.launch({
 		executablePath: await chromium.executablePath(),
-		args: chromium.args,
+		//args: chromium.args,
 		headless: true,
 		ignoreHTTPSErrors: true,
 		args,
