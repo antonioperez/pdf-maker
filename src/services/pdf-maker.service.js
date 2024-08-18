@@ -78,8 +78,6 @@ async function buildBlobFromHtml(title, htmlString) {
 
 		const pdf = await page.pdf({
 			format: "Letter",
-			printBackground: true,
-			preferCSSPageSize: true
 		});
 
 		await page.close();
