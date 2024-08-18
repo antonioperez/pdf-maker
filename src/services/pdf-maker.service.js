@@ -1,5 +1,6 @@
 "use strict";
 const puppeteer = require("puppeteer-core");
+const chromium = require("@sparticuz/chromium");
 const cacheService = require("./cache.service");
 
 module.exports = {
@@ -13,9 +14,7 @@ let browser;
 const puppeteerLaunch = async () => {
 	const args = [
 		"--no-sandbox",
-		"--disable-setuid-sandbox",
 		"--disable-dev-shm-usage",
-		"--disable-session-crashed-bubble",
 		"--disable-accelerated-2d-canvas",
 		"--no-first-run",
 		"--no-zygote",
@@ -28,7 +27,8 @@ const puppeteerLaunch = async () => {
 	];
 
 	browser = await puppeteer.launch({
-		executablePath: "/usr/bin/chromium-browser",
+		executablePath: await chromium.executablePath(),
+		args: chromium.args,
 		headless: true,
 		ignoreHTTPSErrors: true,
 		args,

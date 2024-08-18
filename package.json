@@ -6,9 +6,9 @@
   "scripts": {
     "dev": "node src/index.js",
     "start": "./node_modules/pm2/bin/pm2-runtime start src/index.js -i max --watch",
-	"serve-logs": "node ./node_modules/pm2/bin/pm2 logs --lines 200",
-	"serve-monitor": "node ./node_modules/pm2/bin/pm2 monit",
-	"serve-list": "node ./node_modules/pm2/bin/pm2 list"
+    "serve-logs": "node ./node_modules/pm2/bin/pm2 logs --lines 200",
+    "serve-monitor": "node ./node_modules/pm2/bin/pm2 monit",
+    "serve-list": "node ./node_modules/pm2/bin/pm2 list"
   },
   "author": "",
   "license": "ISC",
@@ -17,6 +17,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "pm2": "^5.4.1",
-    "puppeteer-core": "^23.0.2"
+    "@sparticuz/chromium": "126.0.0",
+    "puppeteer-core": "^22.13.1"
   }
 }
