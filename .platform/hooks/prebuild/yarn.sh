@@ -3,19 +3,20 @@
 # sudo amazon-linux-extras install epel -y
 # A hacky way to install all the package dependencies required for Chrome for Testing.
 # See: https://github.com/GoogleChromeLabs/chrome-for-testing/issues/55
-sudo dnf deplist https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm \
-  | grep provider \
-  | sort --unique \
-  | awk '{print $2}' \
-  | xargs sudo dnf install --best --allowerasing --skip-broken --assumeyes --quiet >& /dev/null
 
-npx --yes @puppeteer/browsers install chrome@stable \
-  | awk '{print $2}' \
-  | xargs -I {} sudo ln --symbolic {} /usr/local/bin/chrome
+# sudo dnf deplist https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm \
+#   | grep provider \
+#   | sort --unique \
+#   | awk '{print $2}' \
+#   | xargs sudo dnf install --best --allowerasing --skip-broken --assumeyes --quiet >& /dev/null
 
-npx --yes @puppeteer/browsers install chromedriver@stable \
-  | awk '{print $2}' \
-  | xargs -I {} sudo ln --symbolic {} /usr/local/bin/chromedriver
+# npx --yes @puppeteer/browsers install chrome@stable \
+#   | awk '{print $2}' \
+#   | xargs -I {} sudo ln --symbolic {} /usr/local/bin/chrome
+
+# npx --yes @puppeteer/browsers install chromedriver@stable \
+#   | awk '{print $2}' \
+#   | xargs -I {} sudo ln --symbolic {} /usr/local/bin/chromedriver
 
 # # Install 3rd party repositories
 # sudo rpm -ivh --nodeps http://mirror.centos.org/centos/7/os/x86_64/Packages/atk-2.22.0-3.el7.x86_64.rpm
