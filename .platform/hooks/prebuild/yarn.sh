@@ -1,4 +1,4 @@
-# !/bin/env bash
+#!/bin/env bash
 
 # sudo amazon-linux-extras install epel -y
 # sudo yum install -y chromium
