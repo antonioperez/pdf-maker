@@ -26,8 +26,11 @@ const puppeteerLaunch = async () => {
 		"--font-render-hinting=none",
 	];
 
-	// chromium.setHeadlessMode = true;
-	// chromium.setGraphicsMode = false;
+	chromium.setHeadlessMode = true;
+	chromium.setGraphicsMode = false;
+
+	console.log(chromium.args);
+	console.log(chromium);
 
 	browser = await puppeteer.launch({
 		executablePath: await chromium.executablePath(),
@@ -78,6 +81,15 @@ async function buildBlobFromHtml(title, htmlString) {
 
 		await page.setContent(htmlString, { waitUntil: "networkidle0" });
 		//await page.goto('data:text/html,' + htmlString, { waitUntil: 'networkidle0' });
+
+		await page.addStyleTag({
+			content: `
+			  html {
+				-webkit-print-color-adjust: exact !important;
+				-webkit-filter: opacity(1) !important;
+			  }
+			`
+		});
 
 		const pdf = await page.pdf({
 			format: "Letter",
