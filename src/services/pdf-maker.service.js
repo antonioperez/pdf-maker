@@ -1,6 +1,6 @@
 "use strict";
 const puppeteer = require("puppeteer");
-const chromium = require("@sparticuz/chromium");
+// const chromium = require("@sparticuz/chromium");
 const cacheService = require("./cache.service");
 
 module.exports = {
@@ -26,20 +26,20 @@ const puppeteerLaunch = async () => {
 		"--font-render-hinting=none",
 	];
 
-	chromium.setHeadlessMode = true;
+	// chromium.setHeadlessMode = true;
 
-	// Optional: If you'd like to disable webgl, true is the default.
-	chromium.setGraphicsMode = false;
+	// // Optional: If you'd like to disable webgl, true is the default.
+	// chromium.setGraphicsMode = false;
 
 	browser = await puppeteer.launch({
 		//executablePath: await chromium.executablePath(),
+		//defaultViewport: chromium.defaultViewport,
 		//args: [...chromium.args, '--disable-gpu'],
 
 		//executablePath: "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
 		executablePath: "/usr/bin/google-chrome",
-		headless: 'shell',
+		headless: true,
 		ignoreHTTPSErrors: true,
-		//defaultViewport: chromium.defaultViewport,
 		args
 	});
 
