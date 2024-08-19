@@ -31,7 +31,7 @@ const puppeteerLaunch = async () => {
 	browser = await puppeteer.launch({
 		executablePath: await chromium.executablePath(),
 		args: [...chromium.args, '--disable-gpu'],
-		headless: chromium.headless,
+		headless: 'shell',
 		ignoreHTTPSErrors: true,
 		defaultViewport: chromium.defaultViewport,
 		//args
