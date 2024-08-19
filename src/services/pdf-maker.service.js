@@ -51,13 +51,6 @@ const puppeteerLaunch = async () => {
 };
 
 async function buildBlobFromHtml(title, htmlString) {
-	// const browser = await puppeteer.launch({
-	// 	executablePath: "/usr/bin/google-chrome-stable",
-	// 	headless: true,
-	// 	ignoreHTTPSErrors: true,
-	// 	args: ["--hide-scrollbars", "--disable-web-security", "--no-sandbox", "--disable-setuid-sandbox"],
-	// });
-
 	const cachedPdf = pdfCache.get(title || '');
 
 	console.log("cachedPdf", title || '', !!cachedPdf);
@@ -78,9 +71,7 @@ async function buildBlobFromHtml(title, htmlString) {
 		await page.setContent(htmlString, { waitUntil: "networkidle0" });
 		//await page.goto('data:text/html,' + htmlString, { waitUntil: 'networkidle0' });
 
-		const pdf = await page.pdf({
-			format: "Letter",
-		});
+		const pdf = await page.pdf();
 
 		await page.close();
 
