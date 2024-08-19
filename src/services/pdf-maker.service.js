@@ -12,30 +12,26 @@ const pdfCache = new cacheService();
 let browser;
 
 const puppeteerLaunch = async () => {
-	const args = [
-		"--no-sandbox",
-		"--disable-dev-shm-usage",
-		"--disable-accelerated-2d-canvas",
-		"--no-first-run",
-		"--no-zygote",
-		"--single-process",
-		"--noerrdialogs",
-		"--disable-gpu",
-		"--hide-scrollbars",
-		"--disable-web-security",
-		"--font-render-hinting=none",
-	];
+	// const args = [
+	// 	"--no-sandbox",
+	// 	"--disable-dev-shm-usage",
+	// 	"--disable-accelerated-2d-canvas",
+	// 	"--no-first-run",
+	// 	"--no-zygote",
+	// 	"--single-process",
+	// 	"--noerrdialogs",
+	// 	"--disable-gpu",
+	// 	"--hide-scrollbars",
+	// 	"--disable-web-security",
+	// 	"--font-render-hinting=none",
+	// ];
 
-	chromium.setHeadlessMode = true;
-	chromium.setGraphicsMode = false;
-
-	console.log(chromium.args);
-	console.log(chromium);
+	chromium.setGraphicsMode = true;
 
 	browser = await puppeteer.launch({
 		executablePath: await chromium.executablePath(),
-		args: chromium.args,
-		headless: true,
+		args: [...chromium.args, '--disable-gpu'],
+		headless: chromium.headless,
 		ignoreHTTPSErrors: true,
 		defaultViewport: chromium.defaultViewport,
 		//args
@@ -81,15 +77,6 @@ async function buildBlobFromHtml(title, htmlString) {
 
 		await page.setContent(htmlString, { waitUntil: "networkidle0" });
 		//await page.goto('data:text/html,' + htmlString, { waitUntil: 'networkidle0' });
-
-		await page.addStyleTag({
-			content: `
-			  html {
-				-webkit-print-color-adjust: exact !important;
-				-webkit-filter: opacity(1) !important;
-			  }
-			`
-		});
 
 		const pdf = await page.pdf({
 			format: "Letter",
