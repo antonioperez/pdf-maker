@@ -71,7 +71,7 @@ async function buildBlobFromHtml(title, htmlString) {
 		await page.setContent(htmlString, { waitUntil: "networkidle0" });
 		//await page.goto('data:text/html,' + htmlString, { waitUntil: 'networkidle0' });
 
-		const pdf = await page.pdf();
+		const pdf = await page.pdf({ format: "A4", printBackground: true });
 
 		await page.close();
 
