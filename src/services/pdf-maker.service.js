@@ -1,5 +1,5 @@
 "use strict";
-const puppeteer = require("puppeteer-core");
+const puppeteer = require("puppeteer");
 const chromium = require("@sparticuz/chromium");
 const cacheService = require("./cache.service");
 
@@ -32,13 +32,14 @@ const puppeteerLaunch = async () => {
 	chromium.setGraphicsMode = false;
 
 	browser = await puppeteer.launch({
-		executablePath: await chromium.executablePath(),
+		//executablePath: await chromium.executablePath(),
 		//args: [...chromium.args, '--disable-gpu'],
 
 		//executablePath: "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+		executablePath: "/usr/bin/google-chrome",
 		headless: 'shell',
 		ignoreHTTPSErrors: true,
-		defaultViewport: chromium.defaultViewport,
+		//defaultViewport: chromium.defaultViewport,
 		args
 	});
 
