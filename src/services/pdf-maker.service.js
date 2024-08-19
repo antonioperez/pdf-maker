@@ -26,13 +26,13 @@ const puppeteerLaunch = async () => {
 		"--font-render-hinting=none",
 	];
 
-	chromium.setHeadlessMode = true;
-	chromium.setGraphicsMode = false;
+	// chromium.setHeadlessMode = true;
+	// chromium.setGraphicsMode = false;
 
 	browser = await puppeteer.launch({
 		executablePath: await chromium.executablePath(),
 		args: chromium.args,
-		headless: chromium.headless,
+		headless: true,
 		ignoreHTTPSErrors: true,
 		defaultViewport: chromium.defaultViewport,
 		//args
