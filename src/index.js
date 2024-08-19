@@ -22,7 +22,7 @@ app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded());
 
 app.get("/hello", async (req, res) => {
-	await sendPDF(res, 'hello', `
+	await sendPDF(res, '', `
 		<!DOCTYPE html>
 		<html lang="en">
 			<head>
