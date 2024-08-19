@@ -19,6 +19,6 @@
     "express": "^4.17.1",
     "pm2": "^5.4.1",
     "puppeteer": "^23.1.0",
-    "puppeteer-core": "22.15.0"
+    "puppeteer-core": "23.1.0"
   }
 }

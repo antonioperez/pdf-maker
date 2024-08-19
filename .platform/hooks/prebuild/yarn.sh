@@ -1,7 +1,7 @@
-!/bin/env bash
+# !/bin/env bash
 
-sudo amazon-linux-extras install epel -y
-sudo yum install -y chromium
+# sudo amazon-linux-extras install epel -y
+# sudo yum install -y chromium
 
 # # Install 3rd party repositories
 # sudo rpm -ivh --nodeps http://mirror.centos.org/centos/7/os/x86_64/Packages/atk-2.22.0-3.el7.x86_64.rpm
