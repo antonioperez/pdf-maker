@@ -12,29 +12,32 @@ const pdfCache = new cacheService();
 let browser;
 
 const puppeteerLaunch = async () => {
-	// const args = [
-	// 	"--no-sandbox",
-	// 	"--disable-dev-shm-usage",
-	// 	"--disable-accelerated-2d-canvas",
-	// 	"--no-first-run",
-	// 	"--no-zygote",
-	// 	"--single-process",
-	// 	"--noerrdialogs",
-	// 	"--disable-gpu",
-	// 	"--hide-scrollbars",
-	// 	"--disable-web-security",
-	// 	"--font-render-hinting=none",
-	// ];
+	const args = [
+		"--no-sandbox",
+		"--disable-dev-shm-usage",
+		"--disable-accelerated-2d-canvas",
+		"--no-first-run",
+		"--no-zygote",
+		"--single-process",
+		"--noerrdialogs",
+		"--disable-gpu",
+		"--hide-scrollbars",
+		"--disable-web-security",
+		"--font-render-hinting=none",
+	];
 
-	chromium.setGraphicsMode = true;
+	chromium.setHeadlessMode = true;
+
+	// Optional: If you'd like to disable webgl, true is the default.
+	chromium.setGraphicsMode = false;
 
 	browser = await puppeteer.launch({
 		executablePath: await chromium.executablePath(),
-		args: [...chromium.args, '--disable-gpu'],
+		//args: [...chromium.args, '--disable-gpu'],
 		headless: 'shell',
 		ignoreHTTPSErrors: true,
 		defaultViewport: chromium.defaultViewport,
-		//args
+		args
 	});
 
 	browser.on("disconnected", () => {
