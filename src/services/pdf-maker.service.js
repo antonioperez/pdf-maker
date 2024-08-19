@@ -68,8 +68,8 @@ async function buildBlobFromHtml(title, htmlString) {
 
 		const page = await browser.newPage();
 		await page.setUserAgent("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36");
-		//await page.setContent(htmlString, { waitUntil: ['domcontentloaded', 'networkidle0'] });
-		await page.goto('data:text/html,' + htmlString, { waitUntil: ['domcontentloaded', 'networkidle0'] });
+		await page.setContent(htmlString, { waitUntil: ['domcontentloaded', 'networkidle0'] });
+		//await page.goto('data:text/html,' + htmlString, { waitUntil: ['domcontentloaded', 'networkidle0'] });
 
 		const pdf = await page.pdf({ format: "Letter", printBackground: true });
 
