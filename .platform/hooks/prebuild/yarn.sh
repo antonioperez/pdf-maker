@@ -1,7 +1,8 @@
 #!/bin/env bash
 
 # sudo amazon-linux-extras install epel -y
-# sudo yum install -y chromium
+sudo yum install -y alsa-lib atk cups-libs gtk3 libXcomposite libXcursor libXdamage libXext libXi libXrandr libXScrnSaver libXtst pango xorg-x11-fonts-100dpi xorg-x11-fonts-75dpi xorg-x11-utils xorg-x11-fonts-cyrillic xorg-x11-server-utils libjpeg libpng glib2 nss libgdk-pixbuf2 libxshmfence ipa-gothic-fonts
+
 
 # # Install 3rd party repositories
 # sudo rpm -ivh --nodeps http://mirror.centos.org/centos/7/os/x86_64/Packages/atk-2.22.0-3.el7.x86_64.rpm
