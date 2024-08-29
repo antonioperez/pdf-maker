@@ -93,9 +93,3 @@ async function buildBlobFromHtml(title, htmlString) {
 function clearCache(title) {
 	pdfCache.remove(title);
 }
-
-try {
-	await puppeteerLaunch();
-} catch (error) {
-	console.error("Error launching puppeteer", error);
-}
