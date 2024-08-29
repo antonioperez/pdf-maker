@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "dev": "node src/index.js",
-    "start": "./node_modules/pm2/bin/pm2-runtime start src/index.js -i max --watch",
+    "start": "./node_modules/pm2/bin/pm2-runtime start src/index.js -i 1 --watch",
     "serve-logs": "node ./node_modules/pm2/bin/pm2 logs --lines 200",
     "serve-monitor": "node ./node_modules/pm2/bin/pm2 monit",
     "serve-list": "node ./node_modules/pm2/bin/pm2 list"
@@ -13,12 +13,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@sparticuz/chromium": "126.0.0",
+    "@sparticuz/chromium": "127.0.0",
     "axios": "^0.21.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "pm2": "^5.4.1",
-    "puppeteer": "^23.1.0",
-    "puppeteer-core": "23.1.0"
+    "puppeteer": "^23.2.1",
+    "puppeteer-core": "23.2.1"
   }
 }
