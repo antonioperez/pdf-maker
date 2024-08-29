@@ -18,7 +18,6 @@ const puppeteerLaunch = async () => {
 		"--disable-accelerated-2d-canvas",
 		"--no-first-run",
 		"--no-zygote",
-		"--single-process",
 		"--noerrdialogs",
 		"--disable-gpu",
 		"--hide-scrollbars",
@@ -66,8 +65,6 @@ async function buildBlobFromHtml(title, htmlString) {
 	}
 
 	if (htmlString) {
-		await puppeteerLaunch();
-
 		if (!browser) {
 			await puppeteerLaunch();
 		}
@@ -95,4 +92,10 @@ async function buildBlobFromHtml(title, htmlString) {
 
 function clearCache(title) {
 	pdfCache.remove(title);
+}
+
+try {
+	await puppeteerLaunch();
+} catch (error) {
+	console.error("Error launching puppeteer", error);
 }
